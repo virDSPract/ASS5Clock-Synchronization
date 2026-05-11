@@ -1,0 +1,79 @@
+Berkeley Clock Synchronization Algorithm — Short Explanation
+Concept
+
+Berkeley Algorithm is used in Distributed Systems to synchronize clocks of multiple nodes/computers.
+
+One node acts as:
+
+Master Node
+
+The master collects time from all nodes, calculates average time, and sends adjustment values to synchronize all clocks.
+
+How Your Program Works
+Step 1: Input Number of Nodes
+Enter number of nodes: 4
+
+There are 4 systems/nodes.
+
+Step 2: Input Time of Each Node
+Node 0 → 10
+Node 1 → 20
+Node 2 → 30
+Node 3 → 40
+
+These are current clock times.
+
+Step 3: Master Node Selection
+int master = 0;
+
+Node 0 becomes master node.
+
+Output:
+
+Node 0 is Master Node
+Step 4: Calculate Average Time
+
+Program adds all times:
+
+10+20+30+40=100
+
+Average:
+
+4
+100
+	​
+
+=25
+
+Output:
+
+Average Time: 25
+Step 5: Calculate Adjustment
+
+Formula:
+
+Adjustment=Average Time−Current Time
+
+Adjustments
+Node	Current Time	Adjustment	New Time
+0	10	+15	25
+1	20	+5	25
+2	30	-5	25
+3	40	-15	25
+Output Meaning
+Node 0 Adjustment = 15 New Time = 25
+
+Means:
+
+Node 0 clock is behind by 15 units.
+So master tells it to increase time by 15.
+Final Result
+
+All nodes become synchronized to:
+
+25
+Simple Viva Explanation
+
+You can say:
+
+“In Berkeley Algorithm, the master node collects clock times from all nodes, calculates the average time, and sends adjustment values to synchronize all clocks to the same time.”
