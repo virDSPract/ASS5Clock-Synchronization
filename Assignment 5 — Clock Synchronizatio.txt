@@ -1,0 +1,267 @@
+Assignment 5 — Clock Synchronization using Berkeley Algorithm
+Aim
+
+To implement the Berkeley Algorithm for clock synchronization in distributed systems.
+
+Objectives
+To understand the basics of:
+Physical clocks
+Logical clocks
+To develop an n-node distributed system implementing:
+Berkeley Time Synchronization Algorithm
+What is Clock Synchronization?
+
+In distributed systems:
+
+Each computer/node has its own clock.
+Due to hardware differences, clocks may show different times.
+
+This causes problems in:
+
+Banking systems
+Distributed databases
+Online transactions
+
+So clocks must be synchronized.
+
+What is Berkeley Algorithm?
+
+The Berkeley Algorithm is a clock synchronization algorithm where:
+
+One node acts as Master
+Other nodes act as Slave nodes
+Master collects all times
+Computes average time
+Sends adjustment values to all nodes
+Real-Life Example
+
+Suppose:
+
+Node	Time
+Node 0	10
+Node 1	12
+Node 2	14
+
+Average:
+
+(10 + 12 + 14) / 3 = 12
+
+Adjusted Times:
+
+Node 0 → +2
+Node 1 → 0
+Node 2 → -2
+
+Final synchronized time:
+
+12
+Berkeley Algorithm Architecture
+            Master Node
+                 |
+     -------------------------
+     |           |           |
+   Node1       Node2       Node3
+
+1. Master collects times
+2. Calculates average
+3. Sends adjustments
+4. All clocks synchronized
+Code Explanation
+Package Declaration
+package BerkeleyAlgorithm;
+
+Defines package name.
+
+Import Scanner
+import java.util.Scanner;
+
+Used for taking user input.
+
+Class Declaration
+public class BerkeleyAlgorithm
+
+Defines main class.
+
+Create Scanner Object
+Scanner scanner = new Scanner(System.in);
+
+Reads input from keyboard.
+
+Input Number of Nodes
+System.out.print("Enter number of nodes: ");
+int n = scanner.nextInt();
+
+User enters total nodes.
+
+Example:
+
+4
+Array for Time Values
+int[] time = new int[n];
+
+Stores time of each node.
+
+Input Node Times
+for (int i = 0; i < n; i++) {
+    System.out.print("Enter time for node " + i + ": ");
+    time[i] = scanner.nextInt();
+}
+
+Takes clock values for all nodes.
+
+Master Node
+int master = 0;
+
+Node 0 is selected as master node.
+
+Display Master Node
+System.out.println("\nNode 0 is Master Node");
+
+Prints master node information.
+
+Calculate Sum
+int sum = 0;
+
+for (int i = 0; i < n; i++) {
+    sum += time[i];
+}
+
+Adds all node times.
+
+Calculate Average Time
+int avg = sum / n;
+
+Finds synchronized time.
+
+Display Average
+System.out.println("\nAverage Time: " + avg);
+
+Prints average time.
+
+Calculate Adjustments
+int adjustment = avg - time[i];
+
+Finds how much each node should adjust.
+
+Display Adjusted Time
+System.out.println(
+    "Node " + i +
+    " Adjustment = " + adjustment +
+    " New Time = " + (time[i] + adjustment)
+);
+
+Shows:
+
+Adjustment value
+New synchronized time
+Close Scanner
+scanner.close();
+
+Releases resources.
+
+Example Execution
+Input
+Enter number of nodes: 4
+
+Enter time for node 0: 10
+Enter time for node 1: 12
+Enter time for node 2: 14
+Enter time for node 3: 16
+Calculation
+Sum
+10 + 12 + 14 + 16 = 52
+Average
+52 / 4 = 13
+Adjustments
+Node	Current Time	Adjustment	New Time
+0	10	+3	13
+1	12	+1	13
+2	14	-1	13
+3	16	-3	13
+Output
+Node 0 is Master Node
+
+Average Time: 13
+
+Adjusted Times:
+
+Node 0 Adjustment = 3 New Time = 13
+Node 1 Adjustment = 1 New Time = 13
+Node 2 Adjustment = -1 New Time = 13
+Node 3 Adjustment = -3 New Time = 13
+Steps To Run Practical in Eclipse
+Step 1
+
+Create Java Project.
+
+Step 2
+
+Create package:
+
+BerkeleyAlgorithm
+Step 3
+
+Create class:
+
+BerkeleyAlgorithm.java
+Step 4
+
+Paste code.
+
+Step 5
+
+Run program.
+
+Step 6
+
+Enter:
+
+Number of nodes
+Time values
+Working of Berkeley Algorithm
+1. Select Master Node
+2. Master requests time from all nodes
+3. Collects all clock values
+4. Computes average time
+5. Sends adjustment values
+6. Nodes update clocks
+Advantages
+Simple synchronization method
+Useful in distributed systems
+No external UTC clock required
+Disadvantages
+If master fails → synchronization fails
+Delay in communication affects accuracy
+Difference Between Berkeley and Cristian Algorithm
+Berkeley Algorithm	Cristian Algorithm
+Uses average time	Uses time server
+Internal synchronization	External synchronization
+Master computes average	Client adjusts to server
+Viva Questions
+1. What is clock synchronization?
+
+Process of making clocks equal in distributed systems.
+
+2. What is Berkeley Algorithm?
+
+Clock synchronization algorithm using average time.
+
+3. What is master node?
+
+Central node coordinating synchronization.
+
+4. Why average time is used?
+
+To minimize clock differences.
+
+5. What is clock drift?
+
+Difference in clock timing between systems.
+
+6. Difference between physical and logical clock?
+Physical Clock	Logical Clock
+Actual time	Event ordering
+Uses hardware clock	Uses counters
+Conclusion
+
+Thus, we successfully implemented the Berkeley Clock Synchronization Algorithm in Java. The master node collected times from all nodes, calculated the average time, and synchronized all clocks by sending adjustment values to each node.
